@@ -42,6 +42,8 @@ RUN apt-get update && \
     echo "" | vncpasswd -f > /home/yoctouser/.vnc/passwd && \
     chown -R yoctouser:yoctouser /home/yoctouser/.vnc && \
     chmod 0600 /home/yoctouser/.vnc/passwd && \
+    echo "dash dash/sh boolean false" | debconf-set-selections && \
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash && \
     locale-gen en_US.UTF-8
 
 USER yoctouser
