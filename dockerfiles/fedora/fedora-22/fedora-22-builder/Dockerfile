@@ -17,11 +17,11 @@
 FROM crops/yocto:fedora-22-base
 
 USER root
-COPY runbitbake.py /home/yoctouser/
-RUN chown -R yoctouser:yoctouser /home/yoctouser/ && \
-    chmod +x /home/yoctouser/runbitbake.py
+COPY runbitbake.py /usr/local/bin
+RUN chown  -R yoctouser:yoctouser /usr/local/bin && \
+    chmod +x /usr/local/bin/runbitbake.py
 
 USER yoctouser
 
 WORKDIR /home/yoctouser
-ENTRYPOINT ["/home/yoctouser/runbitbake.py"]
+ENTRYPOINT ["/usr/local/bin/runbitbake.py"]
