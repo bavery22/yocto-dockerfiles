@@ -18,7 +18,7 @@ FROM crops/yocto:fedora-22-base
 
 USER root
 COPY runbitbake.py /home/yoctouser/
-RUN chown -R yoctouser /home/yoctouser/ && \
+RUN chown -R yoctouser:yoctouser /home/yoctouser/ && \
     chmod +x /home/yoctouser/runbitbake.py
 
 USER yoctouser

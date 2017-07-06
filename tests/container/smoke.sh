@@ -41,6 +41,14 @@ git clone --depth 1 --branch master \
           git://git.yoctoproject.org/poky $workdir/poky
 docker run -t --rm -v $workdir:/workdir -u $(id -u):$(id -g) $image --pokydir=$pokydir \
            -b $builddir -t quilt-native
+# XXX just check permissions and see who is who
+echo "home ls"
+docker run -t --rm --user=root --entrypoint=bash  $image -c "ls -al /home/"
+
+echo "home/yoctouser ls "
+docker run -t --rm --user=root --entrypoint=bash  $image -c "ls -al /home/yoctouser"
+
+
 
 # Since yoctouser in the container may create files that the travis user
 # can't delete, run the container again to delete the files in the directory.
