@@ -39,14 +39,16 @@ docker run -t --rm --entrypoint=/bin/bash -u $(id -u):$(id -g) $image -c 'ls /us
 # Try to build quilt-native which is small and fast to build.
 git clone --depth 1 --branch master \
           git://git.yoctoproject.org/poky $workdir/poky
-docker run -t --rm -v $workdir:/workdir -u $(id -u):$(id -g) $image --pokydir=$pokydir \
-           -b $builddir -t quilt-native
+
 # XXX just check permissions and see who is who
 echo "home ls"
 docker run -t --rm --user=root --entrypoint=bash  $image -c "ls -al /home/"
 
 echo "home/yoctouser ls "
 docker run -t --rm --user=root --entrypoint=bash  $image -c "ls -al /home/yoctouser"
+
+docker run -t --rm -v $workdir:/workdir -u $(id -u):$(id -g) $image --pokydir=$pokydir \
+           -b $builddir -t quilt-native
 
 
 
